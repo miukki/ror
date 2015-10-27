@@ -1,0 +1,104 @@
+@mixin antialiased () {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin br($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin radius-gr($color1, $color2, $color3) {
+	background-color: $color1;
+	background-image: -moz-radial-gradient(center, ellipse cover,  $color1 0%, $color2 50%, $color3 100%);
+	background-image: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,$color1), color-stop(50%,$color2), color-stop(100%,$color3));
+	background-image: -webkit-radial-gradient(center, ellipse cover,  $color1 0%,$color2 50%,$color3 100%);
+	background-image: -o-radial-gradient(center, ellipse cover,  $color1 0%,$color2 50%,$color3 100%);
+	background-image: -ms-radial-gradient(center, ellipse cover,  $color1 0%,$color2 50%,$color3 100%);
+	background-image: radial-gradient(ellipse at 	center,  $color1 0%,$color2 50%,$color3 100%);
+}
+
+@mixin triangle-base() {
+    content: '';
+    display: inline-block;
+    width: 0px;
+    height: 0px;
+}
+@mixin triangle($direction, $size, $color) {
+	$s: $size * 2;
+    @include triangle($direction, $s, $size, $color);
+}
+
+@mixin triangle($direction, $width, $height, $color) {
+    @include triangle-base();
+	@if $direction == up {
+	    border-left: ($width / 2)solid transparent;
+	    border-right: ($width / 2)solid transparent;
+	    border-bottom: $height solid $color;
+
+	} @else if $direction == down {
+	    border-left: ($width / 2) solid transparent;
+	    border-right: ($width / 2) solid transparent;
+	    border-top: $height solid $color;
+
+	} @else if $direction == left {
+		border-top: ($width / 2) solid transparent;
+		border-bottom: ($width / 2) solid transparent;
+		border-right: $height solid $color;
+
+	} @else if $direction == right {
+
+	    border-top: ($width / 2) solid transparent;
+	    border-bottom: ($width / 2) solid transparent;
+	    border-left: $height solid $color;
+
+	}
+
+}
+
+@mixin opacity($opacity) {
+  $opacity-ie: $opacity * 100;
+
+ /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=$opacity-ie)";
+
+  /* IE 5-7 */
+  filter: alpha(opacity=$opacity-ie);
+
+  /* Netscape */
+  -moz-opacity: $opacity;
+
+  /* Safari 1.x */
+  -khtml-opacity: $opacity;
+
+  /* Good browsers */
+  opacity: $opacity;
+
+
+}
+
+
+@mixin apply-to-ie6-only {
+  * html {
+    @content;
+  }
+}
+
+%visuallyhidden {
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
+  position: absolute;
+}
+/*
+.visually-hidden {
+  @extend %visuallyhidden;
+}
+http://zerosixthree.se/8-sass-mixins-you-must-have-in-your-toolbox/
+*/

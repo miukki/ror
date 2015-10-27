@@ -1,0 +1,124 @@
+!!!
+/[if lt IE 7] <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en">
+/[if IE 7] <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en">
+/[if IE 8] <html class="no-js lt-ie10 lt-ie9" lang="en">
+/[if IE 9] <html class="no-js lt-ie10" lang="en">
+<!--[if gt IE 9]><!-->
+%html{:class => 'no-js', :lang => 'en'}<>
+  <!--<![endif]-->
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "", :name => "description"}
+    %meta{:content => "width=device-width", :name => "viewport"}
+    %link{:href => "/favicon.ico", :rel => "shortcut icon"}
+    %title Yinlang
+    = stylesheet_link_tag 'bsie/bootstrap/css/bootstrap', media: 'all'
+
+    /[if lte IE 6]
+      = stylesheet_link_tag 'bsie/bootstrap/css/bootstrap-ie6', media: 'all'
+      = stylesheet_link_tag 'bsie/bootstrap/css/ie', media: 'all'
+
+    = stylesheet_link_tag 'application', media: 'all'
+    = csrf_meta_tags
+
+    :javascript
+      (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);
+
+    /[if gte IE 9]
+      :css
+        .gradient {filter: none;}
+
+  %body
+    - if current_admin
+      = render partial: 'admin_nav'
+
+    - if notice
+      .alert.alert-info
+        = notice
+    - if alert
+      .alert.alert-warning
+        = alert
+    .header
+      %div{:class => 'container clearfix'}
+        .pull-left.span5
+          %ul.unstyled.inline
+            %li
+              %i.icon-sprite.icon-wechat
+              微信公众号：ieltsassistant
+            %li
+              %i.icon-sprite.icon-weibo
+              = link_to '微博：雅思小助手', 'http://weibo.com/u/3946500922', target: '_blank'
+
+    %div.container
+      %div.clearfix
+      .pull-left
+        %a{:href => ""}
+          %i.icon-logo-img.icon-logo
+          %i.icon-logo-txt.icon-logo
+      .pull-right
+        %ul.nav.nav-pills
+          - @main_menu_parents.each do |menu_item|
+            - if menu_item.menu_type == Menu.sub_menu_menu_type
+              - sub_menu = Menu.where(menu: menu_item)
+              - active = false
+              - sub_menu.each do |sub_menu_item|
+                - active = params[:uid] == sub_menu_item.page.uid if active == false
+              %li.dropdown{class: ('active' if active)}
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                  = menu_item.title
+                %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu", :role => "menu"}
+                  - sub_menu.each do |sub_menu_item|
+                    %li{class: ('active' if params[:uid] == sub_menu_item.page.uid)}
+                      = link_to sub_menu_item.page.title, "/#{sub_menu_item.page.uid}"
+            - elsif menu_item.menu_type == Menu.link_menu_type
+              %li{class: ('active' if request.fullpath == URI.escape(menu_item.url))}
+                = link_to menu_item.title, menu_item.url, target: '_blank'
+            - elsif menu_item.menu_type == Menu.page_menu_type
+              %li{class: ('active' if params[:uid] == menu_item.page.uid)}
+                = link_to menu_item.page.title, controller: '/pages', action: :show, uid: menu_item.page.uid
+
+    #main
+      = yield
+
+    .footer
+      .container
+        .row.footer-wrap
+          %ul.block.span3.first-child
+            %li
+              %b 我们的产品
+            - @products_menu.each do |menu_item|
+              = raw(get_footer_menu_item menu_item)
+          %ul.block.span3
+            %li
+              %b 烤鸭须知
+            - @tips_menu.each do |menu_item|
+              = raw(get_footer_menu_item menu_item)
+          %ul.block.span3
+            %li
+              %b 帮助与支持
+            - @support_menu.each do |menu_item|
+              = raw(get_footer_menu_item menu_item)
+          %ul.block.span2
+            %li
+              %b 趴趴团队
+            - @team_menu.each do |menu_item|
+              = raw(get_footer_menu_item menu_item)
+
+      .copyright.text-center.small Copyright © 2015趴趴雅思小助手 沪ICP备XXXXXXXXXXX号
+
+= javascript_include_tag 'bsie/js/jquery-1.7.2.min.js', media: 'all'
+= javascript_include_tag 'bsie/bootstrap/js/bootstrap', media: 'all'
+
+/[if lte IE 6]
+  = javascript_include_tag 'bsie/bootstrap/js/bootstrap-ie', media: 'all'
+
+/ Google Analytics: change UA-XXXXX-X to be your site's ID.
+:javascript
+  (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+  function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+  e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+  e.src='//www.google-analytics.com/analytics.js';
+  r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+  ga('create','UA-XXXXX-X');ga('send','pageview');
+
+= javascript_include_tag 'application', media: 'all'

@@ -1,0 +1,64 @@
+@import 'variable';
+
+html.lt-ie8 {
+  .media-list-group {
+    padding-bottom: 30px;
+
+  }  
+}
+.media-list-group {
+  margin-bottom: 30px;
+
+  .media-list {
+  margin-top: 20px;
+  margin-right: 20px;
+  color: $black;
+  
+  .media-title {
+    border-bottom: 1px solid #E4E4E4;
+    margin-bottom: 15px;
+    position: relative;
+    h4 {
+	    &:after {
+	    	width:30%;
+	    	height:3px;
+	    	background: $red;
+	    	content: '';
+	    	position: absolute;
+	    	display: block;
+	    	bottom:-3px;
+	    }
+    	margin:0px;
+    	.glyphicon {
+    		font-size:85%;
+    		color: $red;
+    		margin-right: 8px;
+    	}
+    }
+  }
+  a {
+  	color: $black;
+  	&:hover {
+  		color: $yellow;
+  	}
+  }
+  .media {
+  	color: $black;
+    line-height: 2.0;
+    .media-body {
+      margin-top: 10px;
+    }
+    .media-object{
+    &.border {
+	    border: 1px solid #E4E4E4;
+	    img {
+	    	margin: 15px auto;
+	    }
+    }
+      width: 100px;
+      height: 100px; 
+      }
+    }
+  }
+
+}

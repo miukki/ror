@@ -1,0 +1,116 @@
+#home
+  %div{:class => 'jumbotron gradient'}
+    .container
+      #myCarousel.carousel.slide
+
+        .carousel-inner
+          - if @carousel_banners.present?
+            - @carousel_banners.each_with_index do |banner, index|
+              .item{ class: ('active' if index == 0) }
+                - image = image_tag banner.image.url, style: "width: #{@carousel_banner_width}px; height: #{@carousel_banner_height}px;"
+                = link_to image, banner.url, target: '_blank'
+
+        %a.glyphicon.glyphicon-chevron-left.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel"}
+          %span.before
+        %a.glyphicon.glyphicon-chevron-right.carousel-control.right{"data-slide" => "next", :href => "#myCarousel"}
+          %span.before
+
+  .container
+    .mediablock
+      .container
+        %ul.thumbnails.row
+
+          %li.text-center.span3.offset1
+            .img-circle.text-center.icon-mediablock.icon-mediablock-profile
+              %i.icon
+              .triangle
+            .thumbnail.clearfix
+              %h3 原创口语素材
+              %p
+                基于雅思小助手口语P2自主选题系统，原创个性化答案，每个烤鸭都值得入手的口语神器
+              %a.btn.btn-danger.pull-right{ href: '/原创口语素材' } 了解更多
+
+          %li.text-center.span3
+            .img-circle.text-center.icon-mediablock.icon-mediablock-note
+              %i.icon
+              .triangle
+            .thumbnail.clearfix
+              %h3 免费在线口语练习平台
+              %p
+                在线模拟雅思口语考试，录音与反馈功能让你找到口语的突破点。
+                %br
+                同时，完全免费！
+              %a.btn.btn-danger.pull-right{ href: 'http://training.ieltsassistant.com/', target: '_blank' } 了解更多
+
+          %li.text-center.span3
+            .img-circle.text-center.icon-mediablock.icon-mediablock-arr
+              %i.icon
+              .triangle
+            .thumbnail.clearfix
+              %h3 烤鸭交流论坛
+              %p
+                烤鸭们的交流平台，分享干货、备考经历，出国相关。
+                %br
+                交流，为了更好的学习。
+              %a.btn.btn-danger.pull-right{ href: 'http://sns.ieltsassistant.com/', target: '_blank' } 了解更多
+
+    .thumbnails-carousel.container
+      #myThumbnails.carousel.slide
+        .carousel-inner
+          - first = true
+          - while @slide_banners.present? && (banners = @slide_banners.to_a.slice!(0..4)).present?
+            .item{ class: ('active' if first) }
+              - first = false
+              %ul.thumbnails.row
+                - banners.each do |banner|
+                  %li.span2
+                    .thumbnail
+                      - image = image_tag banner.image.url, style: "width: #{@slide_banner_width}px; height: #{@slide_banner_height}px;"
+                      = link_to image, banner.url, target: '_blank'
+
+        %a.carousel-control.left{"data-slide" => "prev", :href => "#myThumbnails"}
+          %span.arr <
+          %span.triangle
+        %a.carousel-control.right{"data-slide" => "next", :href => "#myThumbnails"}
+          %span.arr >
+          %span.triangle
+    .container
+      .row
+        .span6.media-list-group
+          %ul.media-list
+            %li.media
+              .media-title.clearfix
+                .pull-right 更多>>
+                %h4
+                  %i.glyphicon.glyphicon-pencil>
+                  最新消息
+              %a.pull-right{:href => "#"}
+                %img.media-object{:src => asset_path("example1.jpg")}/
+              .media-body
+                少量素材串联所有题目，减少背诵量
+                %br/
+                根据当季题库编写，准确率百分之百
+                %br/
+                同城同期材料不同，避免撞衫
+
+        .span6.media-list-group
+          %ul.media-list
+            %li.media
+              .media-title.clearfix
+                %h4
+                  %i.glyphicon.glyphicon-home>
+                  关注我们
+              .clearfix
+                .pull-right.mt30{:href => "#"}
+                  同扫扫微信二维码
+                  %br
+                  每天获取雅思资讯！
+                .pull-right{:href => "#"}
+                  %img.media-object{:src => asset_path("qr.png")}/
+                .pull-left
+                  %span.media-object.border.text-center
+                    %img{:src => asset_path("logo.png")}/
+                %a.pull-left.mt20{:href => "http://weibo.com/u/3946500922", target: '_blank'}<
+                  雅思小助手
+                  %br>
+                  %img{:src => asset_path("weibo.png")}/

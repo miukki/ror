@@ -1,0 +1,87 @@
+@import 'mixin';
+@import 'variable';
+
+html.lt-ie8 {
+	.thumbnails-carousel {
+		ul.thumbnails {
+			> li  {
+				padding-bottom: 10px;
+			}
+		}
+	}	
+}
+.thumbnails-carousel {
+	.carousel {
+		margin-left: 0px;
+		border-left: 8px solid $red;
+		margin-right: 0px;
+		border-right: 8px solid $red;
+
+		margin-top: 30px;
+		background: $lightgrey;
+		margin-bottom: 0px;
+	}
+	ul.thumbnails  {
+		margin-bottom:0px;
+		> li {
+			margin-top: 10px;
+			margin-bottom: 10px;
+			&:first-child {
+				margin-left: 115px;
+			
+			}
+			.thumbnail {
+				cursor: pointer;
+				border: none;
+				background: white;
+				@include br(0px);
+				height: 130px;
+			}
+
+		}	
+
+	}
+	.carousel-control {
+		@include opacity(1.0);
+		cursor: pointer;
+		font-size: $font-size*1.286;
+		padding: 0px;
+		height: 40px;
+		line-height: 40px;
+		width: 0px;
+		font-weight: 700;
+		.triangle {
+		  position: absolute;
+	      top: 0px;
+		}
+	    &.left {
+	    	margin-left: -15px;
+	    	.arr {
+	    	  position: absolute;
+	    	  left:0px;
+	    	}
+	    	.triangle {
+	    	  left: 0;
+		      @include triangle(right, 40px, 24px, $red);
+		    }
+	     }
+	    &.right {
+	    	margin-right: -15px;
+	    	.arr {
+	    	  position: absolute;
+	    	  right: 0px;
+	    	}
+	    	.triangle {
+	    	  right:0;
+		      @include triangle(left, 40px, 24px, $red);
+		    }
+	     }
+	     .arr {
+	     	position: relative;
+	     	z-index:1;
+
+	 	 }
+
+	}
+
+}

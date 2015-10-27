@@ -1,0 +1,17 @@
+.navbar.navbar-inverse
+  .navbar-inner
+    .container-fluid
+      %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{:href => "/"} Home
+      .nav-collapse.collapse
+        %p.navbar-text.pull-right
+          Hello Admin, you can
+          = link_to "Sign out", destroy_admin_session_path, :method => :delete
+        %ul.nav
+          %li{class: ('active' if params[:controller] == 'banners')}
+            %a{:href => "/banners?banner_position_id=1"} Banners
+          %li{class: ('active' if params[:controller] == 'images')}
+            %a{:href => "/images"} Images

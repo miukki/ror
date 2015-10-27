@@ -1,0 +1,60 @@
+
+@import 'variable';
+@import 'mixin';
+
+html.lt-ie7  {
+  .nav-pills {
+    float: right;
+  }
+}
+
+.nav-pills {
+
+  .dropdown-menu {
+    @include br(0px);
+    li > a:hover {
+      background: white !important;
+      color: $yellow !important;
+    }
+    .divider {
+      display: block;
+      margin: 5px 1px;
+    }
+  }
+
+  margin: 28px 0px;
+  font-weight: 700;
+  font-size: $font-size*1.286;
+
+ @mixin navmain () {
+    color: $black;
+    background-color: $yellow;
+    @include br(0px);
+    border-color: $yellow;
+  }
+
+  li.open {
+    .dropdown-toggle {
+      @include navmain();
+    }
+    &.dropdown.active {
+      a:hover {
+        @include navmain();
+      }
+
+    }
+  }
+
+  a {
+    color: $black;
+    @include br(0px);
+    &:hover {
+      color: $black;
+      @include br(0px);
+    }
+  }
+
+  .active > a, .active > a:hover {
+      @include navmain();
+  }
+}

@@ -1,0 +1,70 @@
+@import 'mixin';
+@import 'variable';
+
+html.lt-ie9 {
+  .mediablock {
+    .img-circle {
+      border: 0px;
+      background: url(asset_path('img-circle.png')) !important;
+      width: 148px;
+      height: 158px;
+      .triangle {
+        display:none;
+      }
+    }
+  }
+}
+.mediablock {
+  padding-top: 40px;
+  background: $lightgrey;
+  .img-circle {
+    cursor:pointer;
+    margin: 0 auto;
+    width: 120px;
+    height: 120px;
+    border: 13px solid $lightred;
+    position:relative;
+    .triangle {
+      @include triangle(down, 20px, 10px, $red);
+      position:absolute;
+      left: 50%;
+      margin-left: -10px;
+      bottom: -21px;
+      }
+  
+  }
+
+  .thumbnails {
+    li {
+      border-left: 1px solid rgb(219, 219, 219);
+      padding-left: 35px;
+      &:first-child {
+        border: none;
+        padding-left: 0px;
+      }
+    }
+    li.offset1 {
+      margin-left: 100px;
+    }
+
+    .thumbnail {
+      h3 {
+        font-size: $font-size;
+        color: $red;
+        line-height: 1.0;
+        margin-top: 30px;
+        margin-bottom: 15px;
+      }
+      p {
+        font-size: $font-size*0.857;
+        text-align:left;
+      }
+      padding:0;
+      border:none;
+      color: $black;
+      box-shadow: none;
+    }
+
+  }
+
+}

@@ -1,0 +1,54 @@
+@import 'mixin';
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('/fonts/glyphicons-halflings-regular.eot');
+  src: url('/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/glyphicons-halflings-regular.woff2') format('woff2'),
+       url('/fonts/glyphicons-halflings-regular.woff') format('woff'),
+       url('/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+       url('/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Individual icons
+.glyphicon-chevron-left           { &:before { content: "\e079"; } }
+.glyphicon-chevron-right          { &:before { content: "\e080"; } }
+.glyphicon-pencil                 { &:before { content: "\270f"; } }
+.glyphicon-home                   { &:before { content: "\e021"; } }
+
+
+.arrow {
+      width: 40px;
+      height: 40px;
+      background: url(asset_path('icon-arrow.png')) no-repeat;
+      display:block;
+      @include opacity(1.0);
+}
+
+html.lt-ie8 {
+  .glyphicon-chevron-left  {
+    cursor: pointer;
+    .before {
+        @extend .arrow;
+        background-position: left top;
+      }
+    }
+  .glyphicon-chevron-right  {
+    cursor: pointer;
+    .before {
+        @extend .arrow;
+        background-position: right top;
+      }
+    }
+}
